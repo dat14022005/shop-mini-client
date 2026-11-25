@@ -14,8 +14,15 @@ export default function ProductCard({ product }: Props) {
         <p className="product-price">
           {product.price.toLocaleString("vi-VN")} đ
         </p>
-        <button className="btn">Thêm vào giỏ</button>
+        {!product.inStock && (
+  <span className="badge-out-of-stock">Hết hàng</span>
+)}
+        <button disabled={!product.inStock}>
+  {product.inStock ? 'Thêm vào giỏ' : 'Tạm hết hàng'}
+</button>
       </div>
     </div>
+    
   );
+  
 }

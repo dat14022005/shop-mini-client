@@ -22,13 +22,13 @@ a {
 }
 
 /* ---------- Header ---------- */
-.header {
-  background: #0f1b2d;
-  color: #fff;
+header, .header {
   position: sticky;
   top: 0;
+  z-index: 1000; /* Giữ Header luôn nằm trên các thẻ sản phẩm khi cuộn */
+  background: #247ff7;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-
 .header-inner {
   display: flex;
   align-items: center;
@@ -64,46 +64,82 @@ main {
   margin-bottom: 20px;
 }
 
+/* ================= LƯỚI & THẺ SẢN PHẨM (PRODUCT LIST & CARD) ================= */
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 24px;
+  margin: 24px 0 48px;
 }
 
 .product-card {
-  background: #fff;
-  border-radius: 12px;
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  transition: transform 0.2s;
+  display: flex;
+  flex-direction: column;
+  /* Bỏ position: relative ở đây nếu không cần thiết để tránh đè Header */
 }
-
 .product-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px -6px rgba(15, 23, 42, 0.12);
 }
 
 .product-card img {
   width: 100%;
-  height: 180px;
+  height: 210px;
   object-fit: cover;
-  display: block;
+  background-color: #f8fafc;
 }
 
-.product-body {
+/* Phần thân chứa thông tin bên dưới ảnh */
+.product-info,
+.product-body,
+.card-body {
   padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  flex: 1;
+}
+.product-card button {
+  margin-top: auto;
+  width: 100%;
+  padding: 11px 16px;
+  border: none;
+  border-radius: 10px;
+  background-color: #2563eb;
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.product-card button:disabled {
+  background-color: #e2e8f0;
+  color: #94a3b8;
+  cursor: not-allowed;
+}
+.product-category {
+  font-size: 0.8rem;
+  color: #64748b;
+  font-weight: 500;
+  margin-bottom: 4px;
 }
 
-.product-category {
-  font-size: 13px;
-  color: #6b7280;
+.product-name {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0 0 8px;
+  line-height: 1.4;
 }
 
 .product-price {
+  font-size: 1.1rem;
   font-weight: 700;
-  color: #e07a1f;
+  color: #ea580c;
+  margin: 0 0 16px;
 }
 
 .btn {
@@ -128,7 +164,146 @@ main {
   font-size: 14px;
   line-height: 1.8;
 }
+/* ================= BANNER ================= */
+.banner {
+  background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+  color: #ffffff;
+  padding: 64px 20px;
+  border-radius: 12px;
+  margin: 20px auto;
+  box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.25);
+}
 
+.banner-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+}
+
+.banner-inner h1 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.banner-inner p {
+  font-size: 1.1rem;
+  color: #e0e7ff;
+  margin: 0;
+  max-width: 600px;
+}
+
+.banner-inner .btn {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 12px 28px;
+  background-color: #ffffff;
+  color: #1d4ed8;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.banner-inner .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background-color: #f8fafc;
+}
+
+/* ================= DANH MỤC (CATEGORY LIST) ================= */
+.category-section {
+  margin: 32px 0 24px;
+}
+
+.category-section h2 {
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 14px;
+}
+
+.category-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.category-item {
+  padding: 8px 18px;
+  border: 1px solid #cbd5e1;
+  border-radius: 999px;
+  background-color: #ffffff;
+  color: #334155;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.category-item:hover {
+  background-color: #2563eb;
+  color: #ffffff;
+  border-color: #2563eb;
+  transform: translateY(-1px);
+}
+
+/* ================= NÚT THÊM VÀO GIỎ MỀM MẠI ================= */
+.product-card button {
+  margin-top: auto; /* Luôn ghim nút ở sát đáy thẻ, thẳng hàng 100% */
+  width: 100%;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 10px;
+  background-color: #2563eb;
+  color: #ffffff;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.product-card button:hover:not(:disabled) {
+  background-color: #1d4ed8;
+}
+
+.product-card button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+/* Trạng thái nút khi Hết hàng */
+.product-card button:disabled {
+  background-color: #e2e8f0;
+  color: #94a3b8;
+  cursor: not-allowed;
+}
+
+/* Nhãn Hết hàng gọn gàng */
+.badge-out-of-stock {
+  display: inline-block;
+  align-self: flex-start;
+  background-color: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-bottom: 10px;
+}
+
+/* Tự động thu nhỏ chữ Banner trên màn hình điện thoại */
+@media (max-width: 640px) {
+  .banner {
+    padding: 40px 16px;
+  }
+  .banner-inner h1 {
+    font-size: 1.65rem;
+  }
+}
 /* ---------- Điện thoại ---------- */
 @media (max-width: 600px) {
   .nav {
