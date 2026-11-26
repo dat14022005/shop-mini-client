@@ -19,7 +19,7 @@ console.log(cart.map((i) => `${i.product.name} x${i.quantity}`));
 console.log("Danh mục:", getCategories(products));
 console.log(
   "Điện tử, giá tăng dần:",
-  filterProducts(products, { category: "Điện tử", sort: "asc" }).map((p) => p.name)
+  filterProducts(products, { category: 2, sort: "asc" }).map((p) => p.name)
 );
 console.log(
   "Tìm 'áo', tối đa 300k:",

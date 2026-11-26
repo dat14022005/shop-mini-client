@@ -4,12 +4,12 @@ export type SortOrder = "asc" | "desc";
 
 export type ProductFilter = {
   keyword?: string;
-  category?: string;
+  category?: number;
   maxPrice?: number;
   sort?: SortOrder;
 };
 
-export function getCategories(products: Product[]): string[] {
+export function getCategories(products: Product[]): number[] {
   return [...new Set(products.map((p) => p.category))];
 }
 
@@ -28,3 +28,9 @@ export function filterProducts(products: Product[], filter: ProductFilter = {}):
   if (sort === "desc") return [...result].sort((a, b) => b.price - a.price);
   return result;
 }
+export function searchByPrice(products: Product[], minPrice: number, maxPrice: number): Product[] {
+  return products.filter((p) => p.price >= minPrice && p.price <= maxPrice);
+};
+export function groupByCategory (products: Product[], category: number): Product[] {
+  return products.filter((p) => p.category === category);
+};

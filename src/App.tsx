@@ -8,7 +8,7 @@ import "./App.css";
 
 function App() {
   const cheapProducts = filterProducts(products, { maxPrice: 300000, sort: "asc" });
-  const electronics = filterProducts(products, { category: "Điện tử" });
+  const electronics = filterProducts(products, { category: 2 });
 
   return (
     <>
